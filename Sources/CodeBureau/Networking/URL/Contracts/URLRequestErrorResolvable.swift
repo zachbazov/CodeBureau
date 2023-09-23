@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLRequestErrorResolvable {
+public protocol URLRequestErrorResolvable {
     
     associatedtype RequestErrorType: Error
     

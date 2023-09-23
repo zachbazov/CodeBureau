@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLRequestConfigurable {
+public protocol URLRequestConfigurable {
     var baseURL: URL { get }
     var headers: [String: String] { get }
     var queryParameters: [String: String] { get }

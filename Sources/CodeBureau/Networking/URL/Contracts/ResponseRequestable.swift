@@ -7,4 +7,4 @@
 
 import Foundation
 
-typealias ResponseRequestable = Requestable & ResponseDecodable
+public typealias ResponseRequestable = Requestable & ResponseDecodable

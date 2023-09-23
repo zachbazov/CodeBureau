@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Encodable {
+public extension Encodable {
     
     func toDictionary() throws -> [String: Any]? {
         let data = try JSONEncoder().encode(self)
@@ -18,7 +18,7 @@ extension Encodable {
 }
 
 
-extension Dictionary {
+public extension Dictionary {
     
     var queryString: String {
         return self.map { "\($0.key)=\($0.value)" }
@@ -27,7 +27,7 @@ extension Dictionary {
     }
 }
 
-extension Dictionary where Key == String, Value == String {
+public extension Dictionary where Key == String, Value == String {
     
     static var jsonContentType: [String: String] {
         return ["content-type": "application/json"]

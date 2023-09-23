@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLSessionTaskCancellable {
+public protocol URLSessionTaskCancellable {
     func cancel()
 }
 

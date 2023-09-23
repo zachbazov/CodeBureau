@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Requestable {
+public protocol Requestable {
     
     var method: HTTPMethod { get }
     var path: String { get }
@@ -22,7 +22,7 @@ protocol Requestable {
     func urlRequest(with config: URLRequestConfigurable) throws -> URLRequest
 }
 
-extension Requestable {
+public extension Requestable {
     
     private func url(with config: URLRequestConfigurable) throws -> URL {
         let baseURL = config.baseURL.absoluteString.last != "/" ? config.baseURL.absoluteString + "/" : config.baseURL.absoluteString
@@ -77,7 +77,7 @@ extension Requestable {
     }
 }
 
-extension Requestable {
+public extension Requestable {
     
     private func encodeBodyParameters(bodyParameters: [String: Any], bodyEncoding: BodyEndcoding) -> Data? {
         switch bodyEncoding {

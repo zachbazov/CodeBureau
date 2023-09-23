@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol URLSessionTaskable {
+public protocol URLSessionTaskable {
     var task: URLSessionTaskCancellable? { get }
 }

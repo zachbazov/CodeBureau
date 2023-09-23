@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol URLRequestMongoErrorResolvable {
+public protocol URLRequestMongoErrorResolvable {
     
     associatedtype ResponseType: Decodable
     

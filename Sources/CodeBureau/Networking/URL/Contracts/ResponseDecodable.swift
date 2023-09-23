@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ResponseDecodable {
+public protocol ResponseDecodable {
     var responseDecoder: ResponseDecodable? { get }
     
     func decode<T>(_ data: Data) throws -> T where T: Decodable

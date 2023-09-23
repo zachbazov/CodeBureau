@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol URLSessionRequestable {
+public protocol URLSessionRequestable {
     func request(request: URLRequest,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTaskCancellable
 }
 
 extension URLSession: URLSessionRequestable {
     
-    func request(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTaskCancellable {
+    public func request(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionTaskCancellable {
         let task = dataTask(with: request, completionHandler: completion)
         
         task.resume()

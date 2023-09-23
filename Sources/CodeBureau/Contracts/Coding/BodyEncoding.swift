@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BodyEndcoding {
+public enum BodyEndcoding {
     case jsonSerializationData
     case stringEncodingAscii
 }

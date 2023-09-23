@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum URLRequestGenerationError: Error {
+public enum URLRequestGenerationError: Error {
     case components
 }
