@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct Header: Codable {
+public struct Header: Codable {
     
     /// Type Header Parameter
-    var typ: String?
+    public var typ: String?
     /// Algorithm Header Parameter
-    var alg: String?
+    public var alg: String?
     /// JSON Web Token Set URL Header Parameter
-    var jku : String?
+    public var jku : String?
     /// JSON Web Key Header Parameter
-    var jwk: String?
+    public var jwk: String?
     /// Key ID Header Parameter
-    var kid: String?
+    public var kid: String?
     /// Content Type Header Parameter
-    var cty: String?
+    public var cty: String?
     /// Critical Header Parameter
-    var crit: [String]?
+    public var crit: [String]?
     
     /// Initialize a `Header` instance.
     ///
@@ -33,7 +33,7 @@ struct Header: Codable {
     /// - Parameter cty: The Content Type Header Parameter
     /// - Parameter crit: The Critical Header Parameter
     /// - Returns: A new instance of `Header`.
-    init(
+    public init(
         typ: String? = "JWT",
         jku: String? = nil,
         jwk: String? = nil,

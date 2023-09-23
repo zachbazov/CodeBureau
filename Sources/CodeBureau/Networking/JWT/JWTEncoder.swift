@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JWTEncoder: BodyEncoder {
+public class JWTEncoder: BodyEncoder {
     
     let keyIDToSigner: (String) -> JWTSigner?
     let jwtSigner: JWTSigner?
@@ -18,7 +18,7 @@ class JWTEncoder: BodyEncoder {
     ///
     /// - Parameter jwtSigner: The `JWTSigner` that will be used to sign the JWT.
     /// - Returns: A new instance of `JWTEncoder`.
-    init(jwtSigner: JWTSigner) {
+    public init(jwtSigner: JWTSigner) {
         self.keyIDToSigner = { _ in return jwtSigner }
         self.jwtSigner = jwtSigner
     }
@@ -27,7 +27,7 @@ class JWTEncoder: BodyEncoder {
     ///
     /// - Parameter keyIDToSigner: The function to generate the `JWTSigner` from the JWT `kid` header.
     /// - Returns: A new instance of `JWTEncoder`.
-    init(keyIDToSigner: @escaping (String) -> JWTSigner?) {
+    public init(keyIDToSigner: @escaping (String) -> JWTSigner?) {
         self.keyIDToSigner = keyIDToSigner
         self.jwtSigner = nil
     }
@@ -41,7 +41,7 @@ class JWTEncoder: BodyEncoder {
     /// - throws: `JWTError.invalidUTF8Data` if the provided Data can't be decoded to a String.
     /// - throws: `JWTError.invalidKeyID` if the KeyID `kid` header fails to generate a jwtSigner.
     /// - throws: `EncodingError` if the encoder fails to encode the object as Data.
-    func encode<T : Encodable>(_ value: T) throws -> Data {
+    public func encode<T : Encodable>(_ value: T) throws -> Data {
         guard let jwt = try self.encodeToString(value).data(using: .utf8) else {
             throw JWTError.invalidUTF8Data
         }
@@ -55,7 +55,7 @@ class JWTEncoder: BodyEncoder {
     /// - Returns: A JWT String.
     /// - throws: `JWTError.invalidKeyID` if the KeyID `kid` header fails to generate a jwtSigner.
     /// - throws: `EncodingError` if the encoder fails to encode the object as Data.
-    func encodeToString<T : Encodable>(_ value: T) throws -> String {
+    public func encodeToString<T : Encodable>(_ value: T) throws -> String {
         let encoder = _JWTEncoder(jwtSigner: jwtSigner, keyIDToSigner: keyIDToSigner)
         
         try value.encode(to: encoder)

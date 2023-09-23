@@ -8,12 +8,12 @@
 import Foundation
 import CommonCrypto
 
-class Digest {
+public class Digest {
     
-    var status = Status.success
+    public var status = Status.success
     
     
-    enum Algorithm {
+    public enum Algorithm {
         
         /// Secure Hash Algorithm 1
         case sha1
@@ -35,7 +35,7 @@ class Digest {
     private var engine: DigestEngine
     
     
-    init(using algorithm: Algorithm) {
+    public init(using algorithm: Algorithm) {
         switch algorithm {
         case .sha1:
             engine = DigestEngineCC<CC_SHA1_CTX>(initializer: CC_SHA1_Init, updater: CC_SHA1_Update, finalizer: CC_SHA1_Final, length: CC_SHA1_DIGEST_LENGTH)
@@ -60,7 +60,7 @@ class Digest {
     ///
     /// - Returns: This Digest object (for optional chaining)
     ///
-    func update(from buffer: UnsafeRawPointer, byteCount: size_t) -> Self? {
+    public func update(from buffer: UnsafeRawPointer, byteCount: size_t) -> Self? {
         engine.update(buffer: buffer, byteCount: CC_LONG(byteCount))
         
         return self
@@ -71,7 +71,7 @@ class Digest {
     ///
     /// - Returns: The message digest
     ///
-    func final() -> [UInt8] {
+    public func final() -> [UInt8] {
         return engine.final()
     }
 }

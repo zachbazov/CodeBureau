@@ -7,25 +7,25 @@
 
 import Foundation
 
-class JWTDecoder: BodyDecoder {
+public class JWTDecoder: BodyDecoder {
     
     let keyIDToVerifier: (String) -> JWTVerifier?
     
     let jwtVerifier: JWTVerifier?
     
     
-    init(jwtVerifier: JWTVerifier) {
+    public init(jwtVerifier: JWTVerifier) {
         self.keyIDToVerifier = { _ in return jwtVerifier }
         self.jwtVerifier = jwtVerifier
     }
     
-    init(keyIDToVerifier: @escaping (String) -> JWTVerifier?) {
+    public init(keyIDToVerifier: @escaping (String) -> JWTVerifier?) {
         self.keyIDToVerifier = keyIDToVerifier
         self.jwtVerifier = nil
     }
     
     
-    func decode<T>(_ type: T.Type, fromString: String) throws -> T where T: Decodable {
+    public func decode<T>(_ type: T.Type, fromString: String) throws -> T where T: Decodable {
         let components = fromString.components(separatedBy: ".")
         
         guard components.count > 1,
@@ -59,7 +59,7 @@ class JWTDecoder: BodyDecoder {
         return jwt
     }
     
-    func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
+    public func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
         guard let jwtString = String(data: data, encoding: .utf8) else {
             throw JWTError.invalidUTF8Data
         }
@@ -69,7 +69,7 @@ class JWTDecoder: BodyDecoder {
 }
 
 
-class _JWTDecoder: Decoder {
+fileprivate class _JWTDecoder: Decoder {
     
     var header: Data
     
@@ -88,7 +88,7 @@ class _JWTDecoder: Decoder {
     }
     
     
-    func decode<T: Decodable>(_ type: T.Type) throws -> T {
+    public func decode<T: Decodable>(_ type: T.Type) throws -> T {
         return try type.init(from: self)
     }
     
@@ -118,7 +118,7 @@ private struct _JWTKeyedDecodingContainer<Key: CodingKey>: KeyedDecodingContaine
     
     var codingPath: [CodingKey]
     
-    var allKeys: [Key] {
+    public var allKeys: [Key] {
         #if swift(>=4.1)
         return ["header", "payload"].compactMap { Key(stringValue: $0) }
         #else
@@ -135,7 +135,7 @@ private struct _JWTKeyedDecodingContainer<Key: CodingKey>: KeyedDecodingContaine
     }
     
     
-    func contains(_ key: Key) -> Bool {
+    public func contains(_ key: Key) -> Bool {
         return key.stringValue == "header" || key.stringValue == "payload"
     }
     

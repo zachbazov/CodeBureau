@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct JWTLogger {
+public struct JWTLogger {
     
-    func log(issuedAt: TimeInterval, expiresAt: TimeInterval) {
+    public func log(issuedAt: TimeInterval, expiresAt: TimeInterval) {
         let currentTimestamp = Date().timeIntervalSince1970
         
         let expirationTimestamp = expiresAt

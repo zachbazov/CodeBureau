@@ -8,7 +8,7 @@
 import Foundation
 import CommonCrypto
 
-enum Status: CCCryptorStatus, Swift.Error, CustomStringConvertible {
+public enum Status: CCCryptorStatus, Swift.Error, CustomStringConvertible {
     
     /// Successful
     case success
@@ -37,7 +37,7 @@ enum Status: CCCryptorStatus, Swift.Error, CustomStringConvertible {
     /// Random Number Generator Err
     case rngFailure
     
-    func toRaw() -> CCCryptorStatus {
+    public func toRaw() -> CCCryptorStatus {
         switch self {
         case .success:
             return CCCryptorStatus(kCCSuccess)
@@ -78,14 +78,14 @@ enum Status: CCCryptorStatus, Swift.Error, CustomStringConvertible {
     ///
     /// Obtain human-readable string from enum value.
     ///
-    var description: String {
+    public var description: String {
         return (Status.descriptions[self] != nil) ? Status.descriptions[self]! : ""
     }
     
     ///
     /// Create enum value from raw `CCCryptorStatus` value.
     ///
-    static func fromRaw(status: CCCryptorStatus) -> Status? {
+    public static func fromRaw(status: CCCryptorStatus) -> Status? {
         let from = [
             kCCSuccess: success,
             kCCParamError: paramError,
@@ -99,12 +99,11 @@ enum Status: CCCryptorStatus, Swift.Error, CustomStringConvertible {
         ]
         
         return from[Int(status)]
-    
     }
 }
 
 
-enum CryptorError: Swift.Error, CustomStringConvertible {
+public enum CryptorError: Swift.Error, CustomStringConvertible {
     
     /// Success
     case success

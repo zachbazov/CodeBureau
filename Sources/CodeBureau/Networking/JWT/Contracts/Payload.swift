@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Payload: Codable {
+public protocol Payload: Codable {
     
     /**
      The "exp" (expiration time) claim identifies the expiration time on
@@ -40,7 +40,7 @@ protocol Payload: Codable {
 }
 
 
-extension Payload {
+public extension Payload {
     
     var exp: Date? {
         return nil

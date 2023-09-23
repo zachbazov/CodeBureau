@@ -7,10 +7,10 @@
 
 import Foundation
 
-class PayloadStandardJWT: Payload {
+public class PayloadStandardJWT: Payload {
     
     /// Initialize a `PayloadStandardJWT`
-    init(iss: String? = nil,
+    public init(iss: String? = nil,
          sub: String? = nil,
          aud: [String]? = nil,
          exp: Int,
@@ -32,7 +32,7 @@ class PayloadStandardJWT: Payload {
      JWT.  The processing of this claim is generally application specific.
      The "iss" value is a case-sensitive.
      */
-    var iss: String?
+    public var iss: String?
     
     /**
      The "sub" (subject) claim identifies the principal that is the
@@ -42,7 +42,7 @@ class PayloadStandardJWT: Payload {
      The processing of this claim is generally application specific.  The
      "sub" value is case-sensitive.
      */
-    var sub: String?
+    public var sub: String?
     
     /**
      The "aud" (audience) claim identifies the recipients that the JWT is
@@ -53,7 +53,7 @@ class PayloadStandardJWT: Payload {
      rejected. The interpretation of audience values is generally application specific.
      The "aud" value is case-sensitive.
      */
-    var aud: [String]?
+    public var aud: [String]?
     
     /**
      The "exp" (expiration time) claim identifies the expiration time on
@@ -63,7 +63,7 @@ class PayloadStandardJWT: Payload {
      Implementers MAY provide for some small leeway, usually no more than
      a few minutes, to account for clock skew.
      */
-    var exp: Date?
+    public var exp: Date?
     
     /**
      The "nbf" (not before) claim identifies the time before which the JWT
@@ -73,13 +73,13 @@ class PayloadStandardJWT: Payload {
      provide for some small leeway, usually no more than a few minutes, to
      account for clock skew.
      */
-    var nbf: Date?
+    public var nbf: Date?
     
     /**
      The "iat" (issued at) claim identifies the time at which the JWT was
      issued.  This claim can be used to determine the age of the JWT.
      */
-    var iat: Date?
+    public var iat: Date?
     
     /**
      The "jti" (JWT ID) claim provides a unique identifier for the JWT.
@@ -91,11 +91,11 @@ class PayloadStandardJWT: Payload {
      to prevent the JWT from being replayed.  The "jti" value is case-
      sensitive
      */
-    var jti: String?
+    public var jti: String?
 }
 
 
-extension PayloadStandardJWT {
+public extension PayloadStandardJWT {
     
     func log() {
         let logger = JWTLogger()

@@ -42,7 +42,7 @@ class BlueHMAC: SignerAlgorithm, VerifierAlgorithm {
             .update(data: data)?
             .final()
         else {
-            throw JWTError.invalidSecretKey
+            throw JWTError.invalidPrivateKey
         }
         
         #if swift(>=5.0)

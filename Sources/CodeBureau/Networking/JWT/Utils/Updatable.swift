@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Updatable {
+public protocol Updatable {
     
     /// Status of the calculation.
     var status: Status { get }
@@ -39,6 +39,7 @@ extension Updatable {
     public func update(data: NSData) -> Self? {
         
         _ = update(from: data.bytes, byteCount: size_t(data.length))
+        
         return self.status == .success ? self : nil
     }
     
@@ -75,6 +76,7 @@ extension Updatable {
     public func update(byteArray: [UInt8]) -> Self? {
         
         _ = update(from: byteArray, byteCount: size_t(byteArray.count))
+        
         return self.status == .success ? self : nil
     }
     
@@ -89,6 +91,7 @@ extension Updatable {
     public func update(string: String) -> Self? {
         
         _ = update(from: string, byteCount: size_t(string.utf8.count))
+        
         return self.status == .success ? self : nil
     }
 }

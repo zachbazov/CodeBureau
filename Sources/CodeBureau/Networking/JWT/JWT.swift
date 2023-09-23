@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct JWT<T: Payload>: Codable {
+public struct JWT<T: Payload>: Codable {
     
     /// The JWT header.
-    var header: Header
+    public var header: Header
     
     /// The JWT payload.
-    var payload: T
+    public var payload: T
     
     /// Initialize a `JWT` instance from a `Header` and `Payload`.
     ///
     /// - Parameter header: A JSON Web Token header object.
     /// - Parameter payload: A JSON Web Token payload object.
     /// - Returns: A new instance of `JWT`.
-    init(header: Header = Header(), payload: T) {
+    public init(header: Header = Header(), payload: T) {
         self.header = header
         self.payload = payload
     }
@@ -36,7 +36,7 @@ struct JWT<T: Payload>: Codable {
     /// - Throws: `JWTError.invalidJWTString` if the provided String is not in the form mandated by the JWT specification.
     /// - Throws: `JWTError.failedVerification` if the verifier fails to verify the jwtString.
     /// - Throws: A DecodingError if the JSONDecoder throws an error while decoding the JWT.
-    init(jwtString: String, verifier: JWTVerifier) throws {
+    public init(jwtString: String, verifier: JWTVerifier) throws {
         
         let components = jwtString.components(separatedBy: ".")
         
@@ -70,7 +70,7 @@ struct JWT<T: Payload>: Codable {
     /// - Throws: An EncodingError if the JSONEncoder throws an error while encoding the JWT.
     /// - Throws: `JWTError.osVersionToLow` if not using macOS 10.12.0 (Sierra) or iOS 10.0 or higher.
     /// - Throws: A Signing error if the jwtSigner is unable to sign the JWT with the provided key.
-    mutating func sign(using jwtSigner: JWTSigner) throws -> String {
+    mutating public func sign(using jwtSigner: JWTSigner) throws -> String {
         var tempHeader = header
         tempHeader.alg = jwtSigner.name
         
@@ -87,7 +87,7 @@ struct JWT<T: Payload>: Codable {
     /// - Parameter jwt: A String with the encoded and signed JWT.
     /// - Parameter using algorithm: The algorithm to verify with.
     /// - Returns: A Bool indicating whether the verification was successful.
-    static func verify(_ jwt: String, using jwtVerifier: JWTVerifier) -> Bool {
+    static public func verify(_ jwt: String, using jwtVerifier: JWTVerifier) -> Bool {
         return jwtVerifier.verify(jwt: jwt)
     }
 
@@ -97,7 +97,7 @@ struct JWT<T: Payload>: Codable {
     ///
     /// - Parameter leeway: The time in seconds that the JWT can be invalid but still accepted to account for clock differences.
     /// - Returns: A value of `ValidatePayloadResult`.
-    func validatePayload(leeway: TimeInterval = 0) -> ValidatePayloadResult {
+    public func validatePayload(leeway: TimeInterval = 0) -> ValidatePayloadResult {
         
         guard let expiresAtDate = payload.exp else { fatalError() }
         
