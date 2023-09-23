@@ -7,7 +7,15 @@
 
 import Foundation
 
-public class JWTDecoder: BodyDecoder {
+protocol JWTDecodable: BodyDecoder {
+    
+    var keyIDToVerifier: (String) -> JWTVerifier? { get }
+    var jwtVerifier: JWTVerifier? { get }
+    
+    func decode<T>(_ type: T.Type, fromString: String) throws -> T where T: Decodable
+}
+
+public class JWTDecoder: JWTDecodable {
     
     let keyIDToVerifier: (String) -> JWTVerifier?
     
