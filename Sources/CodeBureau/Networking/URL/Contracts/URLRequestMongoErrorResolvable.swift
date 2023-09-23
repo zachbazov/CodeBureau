@@ -11,5 +11,5 @@ public protocol URLRequestMongoErrorResolvable {
     
     associatedtype ResponseType: Decodable
     
-    func resolve(statusCode: Int, data: Data?) -> ResponseType?
+    func resolve(statusCode: URLResponseCode, data: Data?) -> ResponseType?
 }
