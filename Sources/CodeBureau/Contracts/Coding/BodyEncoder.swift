@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BodyEncoder: AnyObject {
+public protocol BodyEncoder: AnyObject {
     /// Encode an `Encodable` type to a `Data`, using this `BodyEncoder`.
     func encode<T: Encodable>(_ value: T) throws -> Data
 }

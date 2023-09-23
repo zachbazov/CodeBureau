@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BodyDecoder: AnyObject {
+public protocol BodyDecoder: AnyObject {
     /// Decode a `Decodable` type from a `Data`, using this `BodyDecoder`.
     func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T
 }
