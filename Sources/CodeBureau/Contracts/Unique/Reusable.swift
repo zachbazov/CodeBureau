@@ -9,6 +9,6 @@ import Foundation
 
 // MARK: - Reusable Type
 
-protocol Reusable {
+public protocol Reusable {
     static var reuseIdentifier: String { get }
 }
