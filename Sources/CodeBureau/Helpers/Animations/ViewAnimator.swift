@@ -15,6 +15,10 @@ public struct ViewAnimator: ViewAnimatable, ViewAnimationExecutable, AnimationCh
     public var operations: (() -> Void)?
     
     
+    public init() {
+    }
+    
+    
     internal func prepare() {
         preparations?()
     }
