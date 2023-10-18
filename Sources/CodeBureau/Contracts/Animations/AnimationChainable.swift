@@ -12,26 +12,56 @@ import UIKit
 public protocol AnimationChainable {
     
     @discardableResult
-    func animate(withDuration duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions, animations: @escaping () -> Void) -> Self
+    func animate(withDuration duration: TimeInterval,
+                 delay: TimeInterval,
+                 options: UIView.AnimationOptions,
+                 animations: (() -> Void)?,
+                 completion: (() -> Void)?) -> Self
     
-    func then(duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions, animations: @escaping () -> Void) -> Self
+    func then(duration: TimeInterval,
+              delay: TimeInterval,
+              options: UIView.AnimationOptions,
+              animations: (() -> Void)?,
+              completion: (() -> Void)?) -> Self
 }
+
+// MARK: - AnimationChainable Implementation
 
 public extension AnimationChainable {
     
     @discardableResult
-    func animate(withDuration duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions, animations: @escaping () -> Void) -> Self {
+    func animate(withDuration duration: TimeInterval,
+                 delay: TimeInterval,
+                 options: UIView.AnimationOptions,
+                 animations: (() -> Void)? = nil,
+                 completion: (() -> Void)? = nil) -> Self {
         
-        UIView.animate(withDuration: duration, delay: delay, options: options, animations: animations, completion: nil)
+        UIView.animate(withDuration: duration,
+                       delay: .zero,
+                       options: options,
+                       animations: {
+            animations?()
+        },
+                       completion: { _ in
+            completion?()
+        })
         
         return self
     }
     
     @discardableResult
-    func then(duration: TimeInterval = .zero, delay: TimeInterval, options: UIView.AnimationOptions = [], animations: @escaping () -> Void) -> Self {
+    func then(duration: TimeInterval = .zero,
+              delay: TimeInterval,
+              options: UIView.AnimationOptions = [],
+              animations: (() -> Void)? = nil,
+              completion: (() -> Void)? = nil) -> Self {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration + delay) {
-            self.animate(withDuration: duration, delay: delay, options: options, animations: animations)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.animate(withDuration: duration,
+                         delay: .zero,
+                         options: options,
+                         animations: animations,
+                         completion: completion)
         }
         
         return self
