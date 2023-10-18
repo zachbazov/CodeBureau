@@ -7,9 +7,28 @@
 
 import Foundation
 
-// MARK: - Coordinator Type
+// MARK: - ViewControllerObservingBehavior Type
 
-public protocol ViewController {
+@objc
+public protocol ViewControllerObservingBehavior {
+    
+    @objc optional func viewDidBindObservers()
+    @objc optional func viewDidUnbindObservers()
+}
+
+// MARK: - ViewControllerLifecycleBehavior Type
+
+@objc
+public protocol ViewControllerLifecycleBehavior: ViewControllerObservingBehavior {
+    
+    @objc optional func viewDidDeploySubviews()
+    @objc optional func viewHierarchyDidConfigure()
+    @objc optional func viewDidConfigure()
+}
+
+// MARK: - ViewController Type
+
+public protocol ViewController: ViewControllerLifecycleBehavior {
     
     associatedtype ViewModelType: ControllerViewModel
     

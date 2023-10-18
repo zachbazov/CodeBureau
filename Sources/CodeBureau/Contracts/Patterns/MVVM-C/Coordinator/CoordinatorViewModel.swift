@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Coordinator Type
+// MARK: - CoordinatorViewModel Type
 
 public protocol CoordinatorViewModel {
     

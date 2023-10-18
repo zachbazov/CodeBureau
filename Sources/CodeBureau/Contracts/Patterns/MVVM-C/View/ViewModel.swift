@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Coordinator Type
+// MARK: - ViewModel Type
 
 public protocol ViewModel {
     

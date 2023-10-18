@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Coordinator Type
+// MARK: - View Type
 
 public protocol View: UIView {
     
