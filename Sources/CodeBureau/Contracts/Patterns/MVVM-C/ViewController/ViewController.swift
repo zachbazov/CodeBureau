@@ -24,6 +24,8 @@ public protocol ViewControllerLifecycleBehavior: ViewControllerObservingBehavior
     @objc optional func viewDidDeploySubviews()
     @objc optional func viewHierarchyDidConfigure()
     @objc optional func viewDidConfigure()
+    @objc optional func viewDidTargetSubviews()
+    @objc optional func viewDidDeallocate()
 }
 
 // MARK: - ViewController Type
